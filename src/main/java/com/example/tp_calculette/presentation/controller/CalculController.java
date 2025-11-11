@@ -18,12 +18,6 @@ public class CalculController {
     @FXML
     private Label resultLabel;
     @FXML
-    private Label x1Label;
-    @FXML
-    private Label x2Label;
-    @FXML
-    private Label deltaLabel;
-    @FXML
     protected void onCalculate() {
         try {
 
@@ -35,17 +29,11 @@ public class CalculController {
             EquationResult result = EquationSolver.solve(equation);
 
             // Display results
-            deltaLabel.setText("Δ = " + (Double.isNaN(result.getDelta()) ? "N/A" : result.getDelta()));
-            x1Label.setText("x₁ = " + (Double.isNaN(result.getX1()) ? "N/A" : result.getX1()));
-            x2Label.setText("x₂ = " + (Double.isNaN(result.getX2()) ? "N/A" : result.getX2()));
-            resultLabel.setText(result.getMessage());
+            resultLabel.setText(result.toString());
 
 
         } catch (NumberFormatException e) {
             resultLabel.setText("Erreur : Veuillez entrer des nombres valides !");
-            deltaLabel.setText("Δ = N/A");
-            x1Label.setText("x₁ = N/A");
-            x2Label.setText("x₂ = N/A");
         }
     }
 }

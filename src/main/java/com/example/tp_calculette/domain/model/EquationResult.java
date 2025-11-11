@@ -18,11 +18,10 @@ public class EquationResult {
     public double getX2() { return x2; }
     public String getMessage() { return message; }
 
-    @Override
     public String toString() {
-        return "Δ = " + delta +
-                ", x1 = " + x1 +
-                ", x2 = " + x2 +
-                ", message = '" + message + "'";
+        return "Δ = " + delta + "\n"
+                + "x₁ = " + x1 + "\n"
+                + "x₂ = " + x2 + "\n"
+                + "Message : " + message;
     }
 }
