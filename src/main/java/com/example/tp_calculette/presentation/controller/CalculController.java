@@ -1,14 +1,51 @@
 package com.example.tp_calculette.presentation.controller;
 
+import com.example.tp_calculette.domain.model.Equation;
+import com.example.tp_calculette.domain.model.EquationResult;
+import com.example.tp_calculette.domain.service.EquationSolver;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class CalculController {
     @FXML
-    private Label welcomeText;
-
+    private TextField valueAField;
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private TextField valueBField;
+    @FXML
+    private TextField valueCField;
+    @FXML
+    private Label resultLabel;
+    @FXML
+    private Label x1Label;
+    @FXML
+    private Label x2Label;
+    @FXML
+    private Label deltaLabel;
+    @FXML
+    protected void onCalculate() {
+        try {
+
+            double a = Double.parseDouble(valueAField.getText());
+            double b = Double.parseDouble(valueBField.getText());
+            double c = Double.parseDouble(valueCField.getText());
+
+            Equation equation = new Equation(a, b, c);
+            EquationResult result = EquationSolver.solve(equation);
+
+            // Display results
+            deltaLabel.setText("Δ = " + (Double.isNaN(result.getDelta()) ? "N/A" : result.getDelta()));
+            x1Label.setText("x₁ = " + (Double.isNaN(result.getX1()) ? "N/A" : result.getX1()));
+            x2Label.setText("x₂ = " + (Double.isNaN(result.getX2()) ? "N/A" : result.getX2()));
+            resultLabel.setText(result.getMessage());
+
+
+        } catch (NumberFormatException e) {
+            resultLabel.setText("Erreur : Veuillez entrer des nombres valides !");
+            deltaLabel.setText("Δ = N/A");
+            x1Label.setText("x₁ = N/A");
+            x2Label.setText("x₂ = N/A");
+        }
     }
 }
