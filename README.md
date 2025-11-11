@@ -8,8 +8,8 @@ où a, b, et c sont des entiers (Z).
 
 L’application permet à l’utilisateur de saisir les valeurs de a, b, et c, puis d’obtenir les racines de l’équation selon les cas :
 
-Δ > 0 → deux racines réelles distinctes \
-Δ = 0 → une racine réelle double \
+Δ > 0 → deux racines réelles distinctes
+Δ = 0 → une racine réelle double
 Δ < 0 → pas de racine réelle
 
 ## **Technologies utilisées**
