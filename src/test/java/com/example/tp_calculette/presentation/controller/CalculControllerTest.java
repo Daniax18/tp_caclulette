@@ -5,6 +5,9 @@ import javafx.scene.control.TextField;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.application.Platform;
+import org.junit.jupiter.api.BeforeAll;
+
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,6 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CalculControllerTest {
 
     private CalculController controller;
+
+    @BeforeAll
+    static void initToolkit() {
+        // Initialise JavaFX Toolkit pour éviter l'erreur
+        Platform.startup(() -> {});
+    }
+
 
     @BeforeEach
     void setUp() throws Exception {
@@ -22,9 +32,6 @@ public class CalculControllerTest {
         injectPrivateField(controller, "valueBField", new TextField());
         injectPrivateField(controller, "valueCField", new TextField());
         injectPrivateField(controller, "resultLabel", new Label());
-        injectPrivateField(controller, "x1Label", new Label());
-        injectPrivateField(controller, "x2Label", new Label());
-        injectPrivateField(controller, "deltaLabel", new Label());
     }
 
     private void injectPrivateField(Object target, String fieldName, Object value) throws Exception {
@@ -48,7 +55,7 @@ public class CalculControllerTest {
         controller.onCalculate();
 
         Label resultLabel = (Label) getPrivateField(controller, "resultLabel");
-        assertEquals("Deux solutions réelles distinctes (Δ > 0)", resultLabel.getText());
+        assertTrue(resultLabel.getText().contains("Deux solutions réelles distinctes"));
     }
 
     @Test
@@ -60,7 +67,7 @@ public class CalculControllerTest {
         controller.onCalculate();
 
         Label resultLabel = (Label) getPrivateField(controller, "resultLabel");
-        assertEquals("Racine double (Δ = 0)", resultLabel.getText());
+        assertTrue(resultLabel.getText().contains("Racine double"));
     }
 
     @Test
@@ -72,6 +79,18 @@ public class CalculControllerTest {
         controller.onCalculate();
 
         Label resultLabel = (Label) getPrivateField(controller, "resultLabel");
-        assertEquals("Aucune solution réelle (Δ < 0)", resultLabel.getText());
+        assertTrue(resultLabel.getText().contains("Aucune solution réelle"));
+    }
+
+    @Test
+    void testErreurDeSaisie() throws Exception {
+        ((TextField) getPrivateField(controller, "valueAField")).setText("abc");
+        ((TextField) getPrivateField(controller, "valueBField")).setText("2");
+        ((TextField) getPrivateField(controller, "valueCField")).setText("3");
+
+        controller.onCalculate();
+
+        Label resultLabel = (Label) getPrivateField(controller, "resultLabel");
+        assertEquals("Erreur : Veuillez entrer des nombres valides !", resultLabel.getText());
     }
 }

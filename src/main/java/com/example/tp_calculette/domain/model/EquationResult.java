@@ -18,10 +18,19 @@ public class EquationResult {
     public double getX2() { return x2; }
     public String getMessage() { return message; }
 
+    @Override
     public String toString() {
-        return "Δ = " + delta + "\n"
-                + "x₁ = " + x1 + "\n"
-                + "x₂ = " + x2 + "\n"
-                + "Message : " + message;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Δ = ").append(delta).append("\n");
+
+        if (!Double.isNaN(x1)) {
+            sb.append("x₁ = ").append(x1).append("\n");
+        }
+        if (!Double.isNaN(x2)) {
+            sb.append("x₂ = ").append(x2).append("\n");
+        }
+
+        sb.append("Message : ").append(message);
+        return sb.toString();
     }
 }
