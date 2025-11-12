@@ -11,7 +11,7 @@
       fx:controller="com.example.tp_calculette.presentation.controller.CalculController">
 
     <HBox spacing="5" alignment="CENTER">
-        <Label text="Inserez les valeurs a,b,c pour resoudre"/>
+        <Label text="Inserez les valeurs a,b,c pour résoudre"/>
     </HBox>
 
     <HBox spacing="5" alignment="CENTER">

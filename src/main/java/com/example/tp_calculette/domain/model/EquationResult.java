@@ -20,9 +20,17 @@ public class EquationResult {
 
     @Override
     public String toString() {
-        return "Δ = " + delta +
-                ", x1 = " + x1 +
-                ", x2 = " + x2 +
-                ", message = '" + message + "'";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Δ = ").append(delta).append("\n");
+
+        if (!Double.isNaN(x1)) {
+            sb.append("x₁ = ").append(x1).append("\n");
+        }
+        if (!Double.isNaN(x2)) {
+            sb.append("x₂ = ").append(x2).append("\n");
+        }
+
+        sb.append("Message : ").append(message);
+        return sb.toString();
     }
 }
