@@ -1,5 +1,6 @@
-package com.example.tp_calculette;
+package com.example.tp_calculette.app;
 
+import com.example.tp_calculette.app.CalculApplication;
 import javafx.application.Application;
 
 public class Launcher {

@@ -1,4 +1,4 @@
-package com.example.tp_calculette;
+package com.example.tp_calculette.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +10,9 @@ import java.io.IOException;
 public class CalculApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CalculApplication.class.getResource("calcul-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CalculApplication.class.getResource("/com/example/tp_calculette/calcul-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 300);
-        stage.setTitle("Equation 2nd degré");
+        stage.setTitle("Calculatrice - Équation du second degré");
         stage.setScene(scene);
         stage.show();
     }
